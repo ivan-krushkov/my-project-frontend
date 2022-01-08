@@ -13,16 +13,6 @@ env:
   DOCKER_IMAGE_TAG: 1.0.0-${{github.run_number}}
 jobs:
 
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
-    # Lint project
-    - name: Lint
-      run: |
-        npm run lint
-
   build:
 
     runs-on: ubuntu-latest
@@ -37,23 +27,20 @@ jobs:
       with:
         node-version: 12.x
 
-    # Cache node modules
-    - name: Cache node modules
-      id: cache-nodemodules
-      uses: actions/cache@v2
-      env:
-        cache-name: cache-node-modules
+    - name: Get npm cache directory
+      id: npm-cache-dir
+      run: |
+        echo "::set-output name=dir::$(npm config get cache)"
+    - uses: actions/cache@v2
+      id: npm-cache # use this to check for `cache-hit` ==> if: steps.npm-cache.outputs.cache-hit != 'true'
       with:
-        # caching node_modules
-        path: node_modules
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        path: ${{ steps.npm-cache-dir.outputs.dir }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
+          ${{ runner.os }}-node-    
 
     - name: Install Dependencies
-      if: steps.cache-nodemodules.outputs.cache-hit != 'true'
+      if: steps.npm-cache.outputs.cache-hit != 'true'
       run: |
         npm install
 
@@ -63,7 +50,7 @@ jobs:
 
     - name: Test
       run: |
-        npm run test -- --prod
+        npm run test --prod
 
 #    # Install required dependencies to build app
 #    - name: Install dependencies
