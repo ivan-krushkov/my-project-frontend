@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class AuthService {
   constructor(private httpClient: HttpClient) {}
@@ -13,7 +13,7 @@ export class AuthService {
   }
   get getBackendUrl(): string {
     if (!this.authConfig) {
-      console.error("config could not be loaded from app config servcie.");
+      console.error('config could not be loaded from app config servcie.');
     }
     return this.authConfig.backendUrl;
   }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
-import {User} from "../model/user.model";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {first} from "rxjs/operators";
-import {ApiService} from "../core/api.service";
+import {Router} from '@angular/router';
+import {User} from '../model/user.model';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {first} from 'rxjs/operators';
+import {ApiService} from '../core/api.service';
 
 @Component({
   selector: 'app-edit-claim',
@@ -14,12 +14,12 @@ export class EditClaimComponent implements OnInit {
 
   claim: User;
   editForm: FormGroup;
-  constructor(private formBuilder: FormBuilder,private router: Router, private apiService: ApiService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
-    let claimId = window.localStorage.getItem("editUserId");
-    if(!claimId) {
-      alert("Invalid action.")
+    const claimId = window.localStorage.getItem('editUserId');
+    if (!claimId) {
+      alert('Invalid action.');
       this.router.navigate(['list-claim']);
       return;
     }
@@ -41,10 +41,10 @@ export class EditClaimComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          if(data.status === 200) {
+          if (data.status === 200) {
             alert('Claim updated successfully.');
             this.router.navigate(['list-claim']);
-          }else {
+          } else {
             alert(data.message);
           }
         },

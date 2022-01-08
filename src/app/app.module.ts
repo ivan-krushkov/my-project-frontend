@@ -6,11 +6,11 @@ import { LoginComponent } from './login/login.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { ListUserComponent } from './list-user/list-user.component';
-import {ApiService} from "./core/api.service";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {ReactiveFormsModule} from "@angular/forms";
-import {routing} from "./app.routing";
-import {TokenInterceptor} from "./core/interceptor";
+import {ApiService} from './core/api.service';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {ReactiveFormsModule} from '@angular/forms';
+import {routing} from './app.routing';
+import {TokenInterceptor} from './core/interceptor';
 import { ListClaimComponent } from './list-claim/list-claim.component';
 import { AddClaimComponent } from './add-claim/add-claim.component';
 import { EditClaimComponent } from './edit-claim/edit-claim.component';
@@ -50,7 +50,7 @@ import { AuthService } from './core/auth.service';
     }
   }, ApiService, {provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
-    multi : true},],
+    multi : true}, ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

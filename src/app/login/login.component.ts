@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {ApiService} from "../core/api.service";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {ApiService} from '../core/api.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import {ApiService} from "../core/api.service";
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  invalidLogin: boolean = false;
+  invalidLogin = false;
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService) { }
 
   onSubmit() {
@@ -21,19 +21,19 @@ export class LoginComponent implements OnInit {
     const loginPayload = {
       username: this.loginForm.controls.username.value,
       password: this.loginForm.controls.password.value
-    }
+    };
     this.apiService.login(loginPayload).subscribe(data => {
-      //debugger;
-      if(data.status === 200) {
+      // debugger;
+      if (data.status === 200) {
         window.localStorage.setItem('token', data.result.token);
         this.router.navigate(['list-claim']);
-      }else {
+      } else {
         this.invalidLogin = true;
         alert(data.message);
       }
     },
     error => {
-      if(error.status == 401) {
+      if (error.status === 401) {
         this.invalidLogin = true;
       } else {
         alert(error.message);

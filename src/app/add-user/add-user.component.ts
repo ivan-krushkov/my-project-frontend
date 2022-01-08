@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {ApiService} from "../core/api.service";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {ApiService} from '../core/api.service';
 
 @Component({
   selector: 'app-add-user',
@@ -10,7 +10,7 @@ import {ApiService} from "../core/api.service";
 })
 export class AddUserComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder,private router: Router, private apiService: ApiService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService) { }
 
   addForm: FormGroup;
 
@@ -29,7 +29,7 @@ export class AddUserComponent implements OnInit {
 
   onSubmit() {
     this.apiService.createUser(this.addForm.value)
-      .subscribe( data => {
+      .subscribe( () => {
         this.router.navigate(['list-user']);
       });
   }

@@ -1,7 +1,7 @@
-import { Component, OnInit , Inject} from '@angular/core';
-import {Router} from "@angular/router";
-import {User} from "../model/user.model";
-import {ApiService} from "../core/api.service";
+import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import {User} from '../model/user.model';
+import {ApiService} from '../core/api.service';
 
 @Component({
   selector: 'app-list-user',
@@ -15,7 +15,7 @@ export class ListUserComponent implements OnInit {
   constructor(private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
-    if(!window.localStorage.getItem('token')) {
+    if (!window.localStorage.getItem('token')) {
       this.router.navigate(['login']);
       return;
     }
@@ -27,18 +27,18 @@ export class ListUserComponent implements OnInit {
 
   deleteUser(user: User): void {
     this.apiService.deleteUser(user.id)
-      .subscribe( data => {
+      .subscribe( () => {
         this.users = this.users.filter(u => u !== user);
-      })
-  };
+      });
+  }
 
   editUser(user: User): void {
-    window.localStorage.removeItem("editUserId");
-    window.localStorage.setItem("editUserId", user.id.toString());
+    window.localStorage.removeItem('editUserId');
+    window.localStorage.setItem('editUserId', user.id.toString());
     this.router.navigate(['edit-user']);
-  };
+  }
 
   addUser(): void {
     this.router.navigate(['add-user']);
-  };
+  }
 }
