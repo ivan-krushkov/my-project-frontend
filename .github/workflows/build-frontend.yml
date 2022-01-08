@@ -46,4 +46,4 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/my-project-frontend:DOCKER_IMAGE_TAG
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/my-project-frontend:${{ env.DOCKER_IMAGE_TAG }}
