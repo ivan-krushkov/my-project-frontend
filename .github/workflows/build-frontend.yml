@@ -13,6 +13,16 @@ env:
   DOCKER_IMAGE_TAG: 1.0.0-${{github.run_number}}
 jobs:
 
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+    # Lint project
+    - name: Lint
+      run: |
+        npm run lint
+
   build:
 
     runs-on: ubuntu-latest
@@ -45,7 +55,7 @@ jobs:
     - name: Install Dependencies
       if: steps.cache-nodemodules.outputs.cache-hit != 'true'
       run: |
-        npm ci
+        npm install
 
     - name: Lint
       run: |
