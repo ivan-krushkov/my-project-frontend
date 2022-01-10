@@ -73,7 +73,7 @@ jobs:
         npm install
 
     - name: Build code
-      run: npm install && npm run cibuild
+      run: npm run cibuild
 
     - name: Build the Docker image
       run: docker build --tag vigneshsweekaran/easyclaim-frontend:latest .
