@@ -8,3 +8,9 @@ th,td,h2,h3,h4 {
 button {
   margin: 5px;
 }
+
+.button-container {
+  display: flex;
+  justify-content: space-between; 
+  width: 100%;
+}

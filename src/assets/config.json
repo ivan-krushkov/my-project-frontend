@@ -1,5 +1,5 @@
 {
     "authConfig": {
-      "backendUrl": "http://api.example.com:8085"
+      "backendUrl": "http://api.example.com"
     }
 }

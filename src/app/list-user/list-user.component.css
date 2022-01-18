@@ -3,3 +3,11 @@
   flex-direction: column;
   margin: auto;
 }
+
+th,td,h2,h3,h4 {
+  color: white;
+}
+
+button {
+  margin: 5px;
+}

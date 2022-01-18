@@ -21,14 +21,7 @@ export class ListClaimComponent implements OnInit {
       this.router.navigate(['login']);
       return;
     }
-    this.apiService.getClaims()
-      .subscribe( data => {
-          this.claims = data.result;
-          console.log(data.serverIP);
-          if (data.serverIP != null) {
-            this.lastIP = data.serverIP;
-          }
-      });
+    this.getClaims();
   }
 
   deleteClaim(claim: User): void {
@@ -50,5 +43,16 @@ export class ListClaimComponent implements OnInit {
 
   addUser(): void {
     this.router.navigate(['add-user']);
+  }
+
+  getClaims(): void {
+    this.apiService.getClaims()
+      .subscribe( data => {
+          this.claims = data.result;
+          console.log(data.serverIP);
+          if (data.serverIP != null) {
+            this.lastIP = data.serverIP;
+          }
+      });
   }
 }
