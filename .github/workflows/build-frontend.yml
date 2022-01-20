@@ -101,7 +101,7 @@ jobs:
 
     steps:
     - name: Checkout Infrastructure Project 
-      uses: actions/checkout@master
+      uses: actions/checkout@v2
       with: 
         repository: ivan-krushkov/telerik-final-project
         token: ${{ secrets.ACTIONS_TOKEN }}
