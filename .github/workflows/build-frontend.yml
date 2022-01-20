@@ -117,7 +117,7 @@ jobs:
       env:
         DOCKER_USERNAME: '${{ secrets.DOCKER_HUB_USERNAME }}'
       run: |
-       cd kustomize/base/frontend
+       cd kustomize/base
        kustomize edit set image easyclaim-frontend-image=$DOCKER_USERNAME/my-project-frontend:$DOCKER_IMAGE_TAG
        cat kustomization.yaml
 
