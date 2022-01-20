@@ -14,6 +14,7 @@ env:
 jobs:
 
   lint:
+    name: Lint
     runs-on: ubuntu-latest
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -46,6 +47,7 @@ jobs:
         npm run test --prod
 
   build:
+    name: Build
     runs-on: ubuntu-latest
     #Depends on lint's job
     needs: lint
@@ -105,7 +107,6 @@ jobs:
       with: 
         repository: ivan-krushkov/telerik-final-project
         token: ${{ secrets.ACTIONS_TOKEN }}
-        path: ./project
 
     - name: Setup Kustomize
       uses: imranismail/setup-kustomize@v1
@@ -116,14 +117,17 @@ jobs:
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
       run: |
-       cd project/kustomize/base/frontend
+       cd kustomize/base/frontend
        kustomize edit set image easyclaim-frontend-image=$DOCKER_USERNAME/my-project-frontend:$DOCKER_IMAGE_TAG
        cat kustomization.yaml
 
     - name: Commit files
       run: |
-        git add .
-        git config user.name github-actions
-        git config user.email github-actions@github.com
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
         git commit -am "Bump docker tag"
-        git push
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.ACTIONS_TOKEN }}
