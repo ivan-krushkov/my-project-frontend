@@ -115,7 +115,7 @@ jobs:
 
     - name: Update Kubernetes resources
       env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+        DOCKER_USERNAME: '${{ secrets.DOCKER_HUB_USERNAME }}'
       run: |
        cd kustomize/base/frontend
        kustomize edit set image easyclaim-frontend-image=$DOCKER_USERNAME/my-project-frontend:$DOCKER_IMAGE_TAG
@@ -130,4 +130,6 @@ jobs:
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
+        repository: ivan-krushkov/telerik-final-project
         github_token: ${{ secrets.ACTIONS_TOKEN }}
+
