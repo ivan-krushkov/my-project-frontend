@@ -122,8 +122,11 @@ jobs:
 
     - name: Commit files
       run: |
-        git add .
-        git config user.name github-actions
-        git config user.email github-actions@github.com
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
         git commit -am "Bump docker tag"
-        git push
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.ACTIONS_TOKEN }}
